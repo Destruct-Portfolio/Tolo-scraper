@@ -1,0 +1,25 @@
+{
+  "name": "tolo-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "login": "node dist/login.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.5.0",
+    "@types/puppeteer": "^7.0.4",
+    "privacy-pass-redeemer": "^1.0.2",
+    "puppeteer": "^21.0.3",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.6",
+    "winston": "^3.10.0"
+  }
+}
