@@ -1,28 +1,16 @@
 import PuppeteerScrapper from "./components/scraper.js";
-import { getRedemptionHeader } from "privacy-pass-redeemer";
 
 class Login extends PuppeteerScrapper {
   constructor() {
     super();
   }
   protected async $extract(): Promise<void> {
-    let token = [
-      '{"input":[107,68,240,89,170,241,150,69,49,117,169,30,98,173,169,72,122,168,229,192,187,135,61,11,180,120,82,158,32,224,179,234],"factor":"0x5d41a865e6e9432ad33c09939fe4516bdc4354252cd0c7daa7cc0626a45e5e59","blindedPoint":"BCLncSUn5ZE2M73QK9rf0687MnGtSUW50E9jfwWRR8B6JVlIolqRXMiBy0AA2uRa4cwxIPvbJ1Y/lMcRTYZvG8M=","unblindedPoint":"BJWGXxK6h+2isJ2et9Ak8gWUY+4XdckjKklKyPOx/wYZTp1RwiTZbMuDVA2EfCJgCzzh5u+msjqfVTV32XaVJ44=","signed":{"blindedPoint":"BF+T2zW0YpKDzXdTOW4kE9tjFCLP7OXuz4NPTmOyhS4/2dGzpLllX5pY47z2wNYwAXB7T69o9cGO8nqeJJqJMtE=","unblindedPoint":"BPGIOPp8mlR8/EzyPVDpx/G44OkD6yR2RFBzF72qPGpPKwwD0AGigwuzqnpcywnKTo3RK1wrwVicYgKbIL60yjg="}}',
-      '{"input":[193,184,61,211,220,143,166,1,170,167,17,136,45,125,253,190,16,20,195,108,97,114,69,163,149,150,93,211,237,167,186,194],"factor":"0xe1c475407ed966097a75ab4822aa04ea7c9578a7469af90a8b7c28e2a3832f6","blindedPoint":"BDGAXC43LG+PaN1DfJgtADqh3H3XpNgm1VPvwln7eGpcTMim2KH3yhF7MNpo2Ibze+IxQ+U5OrPoBAIp4/ecIuM=","unblindedPoint":"BIWmqhRXRh8tpbm6K1qft3Ktx2py5Zey+PyuhcbTeBIPpPIgGOebmEgBUMonwlR+t9gFkrxyCY0qsnYFVMaT9qg=","signed":{"blindedPoint":"BAQmuTKj81uRPWfPfNbjE90FIZMEJTVDwDXJXIRgEGqLMsjmdbps7+seB1DpD11/caFHMBRxBS/67IHeY3l3pzo=","unblindedPoint":"BLNPLMFiwJwTlkSm6ZqsiKnqaaDTheOqsexR3RnFzwZoU9qac2594puin2nKprXAVVfZN3hPJim8k6hfgu0cLb4="}}',
-      '{"input":[157,111,113,144,153,85,74,213,19,185,0,180,192,154,58,66,216,56,245,205,72,232,10,27,249,187,225,30,43,24,90,9],"factor":"0xdae16146cc1cd78264de3fd9edf8275800165617b5d11cd035c4d794ef38df0c","blindedPoint":"BBM7yE5m+2Oxy8YBctbP/L3fVMb6CjbqGV/t7RjTbeSDR5hkTzrxHtj9BrHAhNvWWqPPsx2p/+0NeXfATEnNG4Y=","unblindedPoint":"BHcmwJFfL1/UuA8e52w1ZV+XZyNIrgRtDQ9yXDYxl669hoYoo634LZhNqTqlYjSu+J81DWCmS5AjzLRdQ615UZ4=","signed":{"blindedPoint":"BBx/DgjKdowIWE3OwH/bfgqqQbV0KsCmB+2GmR89Q3LJqfjAQ36BbnWVdKSyBSA+O2bIL5l2fIXeZlWez7QrmaQ=","unblindedPoint":"BH1NkX41EeeiSasfr0cmQZDao8VGktKO2wJ0qzB0U4P8541j4XL/2kEA9L8M4FXmqfe/xjOkiN3tc/X19BbD7wc="}}',
-      '{"input":[145,188,67,195,68,23,109,211,100,72,226,67,181,45,62,92,67,127,58,194,43,91,85,40,88,26,32,11,250,75,254,93],"factor":"0xd46381d10cf84ad86e57c87e6dcfa3b12814f65ee35eb2c4f8391d0092b7e0d2","blindedPoint":"BIZRMBUkSOlCowixhNo5V/QUJRj21tYWmry5cPFCS2DBW4RPsXI3gKZpzPDFPRQZvWgxT6sjTbhvJ5vS/9HhW/s=","unblindedPoint":"BDw+e8/8hE/o2C6VZR6koez6HmLTCnbSiWfrtRukooVY5O79ourSHYyUTYUMSyUJBDj9I26wDpJbhcZQ4al1tJg=","signed":{"blindedPoint":"BIbrvfqn5cT1OiOaWK2CeZZIQ0wXY2omf+91z6Un50Gr1JZggBBapjmAOb9aqGYzDmPx2CNsesKKuVckiFX3sNY=","unblindedPoint":"BFFj9Jr5ETrAtCuWS0G0rlGBvT0MJtwVP6ZbSK418XN38PybsZg0cqOsgJSj87vc800lde/kvh9IyJcIoaPuaIY="}}',
-      '{"input":[36,6,148,55,65,166,132,206,100,166,231,56,1,196,46,199,202,111,4,38,97,27,15,174,73,12,209,73,49,208,44,246],"factor":"0x50b94f824cf31a638f3f7a2de9fab5a0f8f5148d68ddd8937b3a00c8e51fbfca","blindedPoint":"BMYTcv/9ThWS80FOEdZbTWKUbz9ubwHbN+xwhHpVP57CF0KfRnNeHQJ2nTKgBuODMD1t7k84t9gWwu5L3fpVrWk=","unblindedPoint":"BNWkleseXjc15b16Q3RMy3W+B7rrzTLIKJ2jK/vNQ6Plio0/SpODW8ddjwcORej8nIvQ8mj9Ng2Zu8MQ2juXU3I=","signed":{"blindedPoint":"BNKkebVAIIyjTYdQbK+4FXNU0QVj6d8rBtGzBaBx1wBTPc5ss2/39T1KPS56r18/qRNI619CSVL6OxE1BcRxAOw=","unblindedPoint":"BJ6FSFarwF8vLDvCaOpxEM1MESH+0bRoRl4WVWqL4qinTHXO94D/w+VV0Xax7dIgcggpONNvRadoKzuZOa/qoFY="}}',
-      '{"input":[0,32,145,32,28,119,149,180,77,61,59,159,13,37,72,245,14,113,176,60,85,91,184,68,73,189,241,165,44,86,87,100],"factor":"0x87d4343c2ce19f732a463d15168283155182c09239cdb2c3ea4291fd09cece05","blindedPoint":"BCGsyNclSNxmw/DfShsl0qY8UFPEh4ufZUfML7rJPcWIbotu6XMUJhV+M7EFEV4k7DzjRAzQOPRXcIZhupvjF7M=","unblindedPoint":"BNF2+vzpyRN+ZiJnIlBgtME24fzKjvXvxRoxK+eoLUJUQhPzEyj7askEyX0HXp0DNOgMi+RdEN+6ohI64rbGkuo=","signed":{"blindedPoint":"BE89vptHv4bGyU//oEmDiYmpSPO2wuucUMnaQiTQufE5gxbvWGjfQ67/8sxw3tcPLvmuRiezEB2VqCRk5jHpiH0=","unblindedPoint":"BAh5+WOeVd4rlm8yOEF/ly5X6juz24FaISBjpwGfHvCCXZwcIYcLZM89GtH+X93uyMJxoOxlA6Ah5DBvLSrMty8="}}',
-      '{"input":[14,163,176,146,217,217,229,89,109,184,32,195,217,231,152,90,115,111,149,225,88,136,68,72,172,239,101,66,153,100,220,118],"factor":"0xb19adb5e463df051de32482db2fb37773843613466d39124292ec55b31e28bf7","blindedPoint":"BHgpAt4poS2G4v7x/E0U/uP6Mz8fUjQQJhDg3yBfbCvVsS0zc8m1sRZYTptiXOt7F7uS1aJzDJPxukyUxgoVZUY=","unblindedPoint":"BLTgz/J3YCNCxMKDGSvfkP253iuKfmeYB0x264PQ8pyM/aR4cOJerJlDODortWr7pYXrh9BZ4rS8GceKNKeoz9o=","signed":{"blindedPoint":"BGLc8IGx7pn/heJTEfPuE/VW8gRgr6+6Sq/6M64vF1b+yc6cCusJa+w8OxiDM+4US4jZnwJ5SGmEGjEuF2Ej6iw=","unblindedPoint":"BH1P2Ji8Caqs9mxMs10Q6QV4qJAnRXdAOyNHXGv1oBNVLpRpA8K4e2acFM1N8Jhm7i63GJoZ5+468pGubVu6Opc="}}',
-      '{"input":[208,164,192,120,121,167,65,109,124,11,231,140,211,92,166,120,132,50,9,54,71,175,108,105,219,140,216,115,215,14,250,232],"factor":"0xebba757141dfd8a65eccc6dfe4984517c597955db8ebd4c60f4b57f520b448c0","blindedPoint":"BNjhTxpKocNgMXJX74lnCwVWdEDKpT08AGxJ7basCnYM8lY5WQgR/vD55xsR1jrYmk8NvJbRhbm0KRhsbFdeAo4=","unblindedPoint":"BAjIVdZvk9t4oKD2ba1HoxNgtOSeLA9iHercIuML5ldkoHo85U6clNfNOBA232O47rVnkxEWxHtB7fHqkA2Twpw=","signed":{"blindedPoint":"BJLucWVBMe7aNxPfKOvKG4E3wVZvY7BhA+so/ScPVStNwNoLJn6Wqh31AJCI5tjjPSNIdWMsfn92ncDMEfQcOC4=","unblindedPoint":"BIAja190sFyff5A8wnJTO5tjK1v3k0P12KIjj0jWXwvNBknSUPVREI3y0X7jW3CMTmHEtzAPWCA++yPQ1+z1/uk="}}',
-      '{"input":[204,217,1,215,210,37,48,58,109,229,248,235,127,16,67,23,172,183,128,45,215,188,85,105,96,9,207,113,177,119,53,23],"factor":"0x5c5dc853c4f56409b07d6db66db114550d16bcd71e2fc355792e9fcd47f2d045","blindedPoint":"BP8pwJqXTdEYtBURJ/74kfoUA8b1J7Xmj1LfpZwGba9LZMIUmFi+yPNl0xIR26NclwnVTNRq7sJ2M/taFURhHrA=","unblindedPoint":"BF1IGLAT0jT0RVIjx9aYAPKmaZxcaGTOsnw/cMHDtIJBnFbbSXNLSjnasn47lFkPKcgSt7J6Bq3zmGuTbqWUyLA=","signed":{"blindedPoint":"BPiBLOAgK5HfDIkdULohvNhLpkiFPU0idLJf46JsrILdHO6caaHFJxlLWpeB//1USoiPTrfSQVSkkNvoX58ygzQ=","unblindedPoint":"BF4EpCnHo7qRY9if4zxVLf34ZFMowkBuoK7maTLyELcr9nskG8YV2eZy8fZ/fRJqLawet0scb8TIyvTsBadZgFk="}}',
-    ];
     if (this.$page !== null) {
-      let url = "https://www.hotbit.io/";
-      await this.$page.setExtraHTTPHeaders(getRedemptionHeader(JSON.parse(token[2]), url, "GET"));
-      await this.$page.goto(url, { timeout: 0, waitUntil: "networkidle2" });
-      await this.$page.reload();
-      await this.$page.waitForSelector("#app > div > img");
+      await this.$page.setDragInterception(true)
+      this.$page.on('framenavigated', frame => {
+        const url = frame.url()
+
+      })
     }
   }
 }

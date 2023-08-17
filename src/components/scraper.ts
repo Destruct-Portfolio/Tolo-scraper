@@ -52,7 +52,7 @@ export default class PuppeteerScrapper {
     await this._cleanup();
     await this._setup();
   }
-  protected async $extract() {}
+  protected async $extract() { }
 
   public async exec() {
     await this._setup();
